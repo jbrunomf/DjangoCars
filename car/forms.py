@@ -17,6 +17,10 @@ class CarModelForm(forms.ModelForm):
             self.add_error('value', 'Valor mínimo do veículo deve ser de R$ 10000,00.')
         return value
 
+
+    """
+    Valida o ano de fabricação. (RN002).
+    """
     def clean_manufacturing_year(self):
         year = self.cleaned_data['manufacturing_year']
 
