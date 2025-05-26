@@ -1,4 +1,3 @@
-from PIL.Image import blend
 from django import forms
 from car.models import Brand, Car
 
@@ -24,3 +23,9 @@ class CarForm(forms.Form):
         )
         car.save()
         return car
+
+
+class CarModelForm(forms.ModelForm):
+    class Meta:
+        model = Car
+        fields = '__all__'
