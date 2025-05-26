@@ -1,6 +1,6 @@
 from PIL.Image import blend
 from django import forms
-from car.models import Brand
+from car.models import Brand, Car
 
 
 class CarForm(forms.Form):
@@ -10,4 +10,17 @@ class CarForm(forms.Form):
     model_year = forms.IntegerField()
     plate = forms.CharField(max_length=7)
     value = forms.DecimalField()
-    photo = forms.ImageField()
+    image = forms.ImageField()
+
+    def save(self):
+        car = Car(
+            model=self.cleaned_data['model'],
+            brand=self.cleaned_data['brand'],
+            manufacturing_year=self.cleaned_data['manufacturing_year'],
+            model_year=self.cleaned_data['model_year'],
+            plate=self.cleaned_data['plate'],
+            value=self.cleaned_data['value'],
+            image=self.cleaned_data['image'],
+        )
+        car.save()
+        return car

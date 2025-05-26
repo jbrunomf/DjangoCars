@@ -1,8 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+
+        <input type="submit" value="Cadastrar" class="btn btn-salvar">
+
+    <div class="errors">
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    </div>
     </form>
 {% endblock content %}
