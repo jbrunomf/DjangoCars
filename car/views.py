@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from car.models import Car
-from car.forms import CarForm, CarModelForm
+from car.forms import CarModelForm
 
 
 def cars_list(request):
