@@ -7,7 +7,7 @@ class CarModelForm(forms.ModelForm):
         model = Car
         fields = '__all__'
 
-    """"
+    """
     Valida se o veículo foi enviado com valor mínimo de R$ 10000,00. (RN001).
     """
 
