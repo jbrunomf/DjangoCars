@@ -4,6 +4,7 @@ from django.views import View
 from car.models import Car
 from car.forms import CarModelForm
 
+
 class CarsListView(View):
     def get(self, request):
         cars = Car.objects.all()
@@ -16,15 +17,14 @@ class CarsListView(View):
         return render(request, template_name='cars.html', context=ctx)
 
 
+class NewCarView(View):
+    def get(self, request):
+        form = CarModelForm()
+        return render(request, 'create.html', {'form': form})
 
-def new_car(request):
-    if request.method == 'POST':
+    def post(self, request):
         form = CarModelForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('cars_list')
-    else:
-        form = CarModelForm()
-    return render(request, 'create.html', {'form': form})
-
-
+        return render(request, 'create.html', {'form': form})
