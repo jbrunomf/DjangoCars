@@ -99,8 +99,8 @@
     </form>
 
     <div class="car-grid">
-        {% if cars %}
-            {% for car in cars %}
+        {% if object_list %}
+            {% for car in object_list %}
                 <div class="car-card">
                     {% if car.image %}
                         <img src="{{ car.image.url }}" alt="{{ car.model }} - {{ car.brand }}">

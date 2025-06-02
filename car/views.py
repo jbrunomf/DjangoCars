@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.views.generic import ListView
 
 from car.models import Car
 from car.forms import CarModelForm
@@ -15,6 +16,20 @@ class CarsListView(View):
 
         ctx = {'cars': cars}
         return render(request, template_name='cars.html', context=ctx)
+
+
+class CarListView(ListView):
+    model = Car
+    template_name = 'cars.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        search = self.request.GET.get('search')
+        if search:
+            queryset = super().get_queryset().filter(model__icontains=self.request.GET.get('search'))
+        else:
+            queryset = super().get_queryset().order_by('model')
+        return queryset
 
 
 class NewCarView(View):
