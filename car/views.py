@@ -1,4 +1,3 @@
-
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 
 from car.models import Car
@@ -26,8 +25,15 @@ class CarCreateView(CreateView):
     success_url = '/cars/'
     form_context_name = 'test'
 
+
 class CarDetailView(DetailView):
     model = Car
     template_name = 'detail.html'
     context_object_name = 'car'
 
+
+class CarUpdateView(UpdateView):
+    model = Car
+    form_class = CarModelForm
+    template_name = 'car_update.html'
+    success_url = '/cars/'
