@@ -53,6 +53,11 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+        .no-link {
+            font-size: 10px;
+            text-decoration: none;
+            color: black;
+        }
 
         form {
             display: flex;
@@ -101,17 +106,17 @@
     <div class="car-grid">
         {% if object_list %}
             {% for car in object_list %}
-                <div class="car-card">
-                    {% if car.image %}
-                        <img src="{{ car.image.url }}" alt="{{ car.model }} - {{ car.brand }}">
-                    {% else %}
-                        <img src="{% static 'images/../../media/no-image.jpg' %}" alt="Imagem não disponível">
-                    {% endif %}
-                    <h2>{{ car.brand }} {{ car.model }}</h2>
-                    <p>{{ car.factory_year }} - R$ {{ car.value }}</p>
-
-                    <a href="{% url 'car_detail' car.id %}" class="btn btn-success"></a>
-                </div>
+                <a href="{% url 'car_detail' car.id %}" class="no-link">
+                    <div class="car-card">
+                        {% if car.image %}
+                            <img src="{{ car.image.url }}" alt="{{ car.model }} - {{ car.brand }}">
+                        {% else %}
+                            <img src="{% static 'images/../../media/no-image.jpg' %}" alt="Imagem não disponível">
+                        {% endif %}
+                        <h2>{{ car.brand }} {{ car.model }}</h2>
+                        <p>{{ car.factory_year }} - R$ {{ car.value }}</p>
+                    </div>
+                </a>
             {% endfor %}
         {% else %}
             <p class="no-results">Nenhum carro encontrado.</p>
