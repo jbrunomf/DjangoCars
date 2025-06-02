@@ -6,18 +6,6 @@ from car.models import Car
 from car.forms import CarModelForm
 
 
-class CarsListView(View):
-    def get(self, request):
-        cars = Car.objects.all()
-        search_str = request.GET.get('search')
-
-        if search_str:
-            cars = Car.objects.filter(model__icontains=search_str)
-
-        ctx = {'cars': cars}
-        return render(request, template_name='cars.html', context=ctx)
-
-
 class CarListView(ListView):
     model = Car
     template_name = 'cars.html'
