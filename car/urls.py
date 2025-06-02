@@ -20,6 +20,6 @@ from .views import CarListView, CarCreateView, CarDetailView, CarUpdateView
 urlpatterns = [
     path('', CarListView.as_view(), name='car_list'),
     path('create/', CarCreateView.as_view(), name='car_create'),
-    path('detail/<int:pk>', CarDetailView.as_view(), name='car_detail'),
-    path('update/<int:pk>', CarUpdateView.as_view(), name='car_update'),
+    path('<int:pk>/detail', CarDetailView.as_view(), name='car_detail'),
+    path('<int:pk>/update', CarUpdateView.as_view(), name='car_update'),
 ]
