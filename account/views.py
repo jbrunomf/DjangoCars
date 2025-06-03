@@ -22,7 +22,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('cars_list')
+            return redirect('car_list')
         return render(request, 'login.html', {'form': form})
     else:
         form = AuthenticationForm()
