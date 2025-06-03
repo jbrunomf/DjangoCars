@@ -22,14 +22,14 @@ class CarListView(ListView):
 class CarCreateView(CreateView):
     model = Car
     form_class = CarModelForm
-    template_name = 'create.html'
+    template_name = 'car_create.html'
     success_url = '/cars/'
     form_context_name = 'test'
 
 
 class CarDetailView(DetailView):
     model = Car
-    template_name = 'detail.html'
+    template_name = 'car_detail.html'
     context_object_name = 'car'
 
 
