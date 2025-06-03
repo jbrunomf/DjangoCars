@@ -1,4 +1,7 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
 from car.models import Car
@@ -19,6 +22,7 @@ class CarListView(ListView):
         return queryset
 
 
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class CarCreateView(CreateView):
     model = Car
     form_class = CarModelForm
@@ -33,6 +37,7 @@ class CarDetailView(DetailView):
     context_object_name = 'car'
 
 
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class CarUpdateView(UpdateView):
     model = Car
     form_class = CarModelForm
@@ -43,6 +48,7 @@ class CarUpdateView(UpdateView):
         return reverse_lazy('car_detail', kwargs={'pk': self.object.pk})
 
 
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class CarDeleteView(DeleteView):
     model = Car
     template_name = 'car_delete.html'
