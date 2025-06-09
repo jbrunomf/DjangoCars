@@ -9,14 +9,14 @@ from car.models import CarInventory
 def car_pre_save(sender, instance, *args, **kwargs):
     print("pre_save")
 
+
 @receiver(post_save, sender='car.Car')
 def car_post_save(sender, instance, *args, **kwargs):
     print('Calculando valor do inventário..')
     cars = sender.objects.all()
     total_value = cars.aggregate(Sum('value'))['value__sum'] or 0
     car_count = len(cars)
-    inventory = CarInventory(
+    CarInventory.objects.create(
         car_count=car_count,
         car_total_value=total_value
     )
-    inventory.save()
