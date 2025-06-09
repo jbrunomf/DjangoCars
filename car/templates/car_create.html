@@ -3,14 +3,17 @@
 {% block content %}
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+    <table>
+       {{ form.as_table }}
+    </table>
+
 
         <input type="submit" value="Cadastrar" class="btn btn-salvar">
 
     <div class="errors">
         {% if form.errors %}
             <div class="alert alert-danger">
-                {% for error in form.non_field_errors %}
+                {% for error in form.errors %}
                     <p>{{ error }}</p>
                 {% endfor %}
             </div>

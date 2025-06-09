@@ -28,3 +28,9 @@ def car_post_save(sender, instance, *args, **kwargs):
 @receiver(post_delete, sender='car.Car')
 def car_post_delete(sender, instance, *args, **kwargs):
     car_inventory_update()
+
+
+@receiver(pre_save, sender='car.car')
+def car_pre_save(sender, instance, *args, **kwargs):
+    if not instance.description:
+        instance.description = "Descrição não informada."
