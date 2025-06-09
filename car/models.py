@@ -19,3 +19,15 @@ class Car(models.Model):
 
     def __str__(self):
         return self.model
+
+
+class CarInventory(models.Model):
+    car_count = models.IntegerField()
+    car_total_value = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'{self.car_count} {self.car_total_value} {self.created_at}'
