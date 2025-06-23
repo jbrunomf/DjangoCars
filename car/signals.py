@@ -4,10 +4,17 @@ from django.dispatch import receiver
 
 from car.models import CarInventory, Car
 
+from openai_api.client import get_car_description
+
 
 @receiver(pre_save, sender='car.Car')
 def car_pre_save(sender, instance, *args, **kwargs):
-    print("pre_save")
+    if not instance.description:
+        instance.description = get_car_description(
+            model=instance.model,
+            brand=instance.brand,
+            model_year=instance.model_year
+        )
 
 
 def car_inventory_update():
